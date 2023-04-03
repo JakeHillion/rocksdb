@@ -1140,11 +1140,13 @@ configure_file(util/build_version.cc.in ${BUILD_VERSION_CC} @ONLY)
 add_library(${ROCKSDB_STATIC_LIB} STATIC ${SOURCES} ${BUILD_VERSION_CC})
 target_link_libraries(${ROCKSDB_STATIC_LIB} PRIVATE
   ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+target_include_directories(${ROCKSDB_STATIC_LIB} PUBLIC include)
 
 if(ROCKSDB_BUILD_SHARED)
   add_library(${ROCKSDB_SHARED_LIB} SHARED ${SOURCES} ${BUILD_VERSION_CC})
   target_link_libraries(${ROCKSDB_SHARED_LIB} PRIVATE
     ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
+  target_include_directories(${ROCKSDB_SHARED_LIB} PUBLIC include)
 
   if(WIN32)
     set_target_properties(${ROCKSDB_SHARED_LIB} PROPERTIES
